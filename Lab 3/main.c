@@ -5,32 +5,53 @@
 
 int main()
 {
-	int cnt, c, c_2, flag;
+	int cnt, c, c_2, flag, ch_cnt, found;
 	cnt = 0; //счетчик
-	flag = NO; //признак
+	flag = NO; //признак слова
+	found = NO; //индикатор обнаружения признака
+	ch_cnt = 0; //счетчик символов внутри слова
 	while ((c = getchar()) != EOF)
 	{
-		if ((c == ' ') || (c == '.') || (c == ',') || (c =='\n'))
+		if ((c == ' ') || (c == '.') || (c == ',') || (c == '\n'))
 		{
-			flag = NO;
+			ch_cnt = 0;
 			c_2 = ' ';
+			if (flag == YES)
+			{
+				if (found == YES)
+				{
+					cnt++;
+				}
+			}
+			flag = NO;
 		}
 		else
 		{
-			if (flag == NO)
+			if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 			{
-				flag = YES;
-				c_2 = c;
+				ch_cnt++;
+				if (ch_cnt == 1)
+				{
+					c_2 = c;
+				}
+				if (ch_cnt == 2)
+				{
+					flag = YES;
+					if (c-'a' == c_2-'A' || c-'A' == c_2-'a'|| c == c_2)
+					{
+						found = YES;
+					}
+					else
+					{
+
+						found = NO;
+					}
+				}
 			}
 			else
 			{
-				if (c_2 == c)
-				{
-					cnt++;
-					c_2 = ' ';
-				}
-				else
-					c_2 = ' ';
+				c_2 = ' ';
+				flag = NO;
 			}
 		}
 	}

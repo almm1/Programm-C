@@ -33,7 +33,6 @@ int main(void)
 			{
 				min = x[i][j]; 
 				n = i;
-				m = j;
 			}
 		}
 	}

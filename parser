@@ -1,0 +1,127 @@
+#include "pch.h"
+#include <iostream>
+#include <stdlib.h>
+#include <string.h>
+
+
+int main()
+{
+	int k = 0;
+	float num_1 = 0; //первой аргумент
+	float num_2 = 0; //второй аргумент
+	float res = 0; //результат
+	char* pEnd; 
+	char znak; //операция
+	char line[80]; //исходная строка
+	gets_s(line);
+	
+	for (int i = 0; i < 10; i++) //проверка строки на знаки
+	{
+		if (line[i] == '+')
+		{
+			k = 1;
+			znak = '+';
+		}
+		if ((line[i] == '-'))
+		{
+			k = 1;
+			znak = '-';
+		}
+
+		if (line[i] == '*')
+		{
+			k = 1;
+			znak = '*';
+		}
+		if (line[i] == '/')
+		{
+			k = 1;
+			znak = '/';
+		}
+		if ((line[i] == '+') && (line[i++] == '-')) //если второй аргумент отрицательный
+		{
+			k = 2;
+			znak = '+-';
+		}
+		if ((line[i] == '*') && (line[i++] == '-'))
+		{
+			k = 2;
+			znak = '*-';
+		}
+		if ((line[i] == '/') && (line[i++] == '-'))
+		{
+			k = 2;
+			znak = '/-';
+		}
+	}
+
+	char *pch = strtok(line, "+-/*"); //разделение строки на лексммы, в тех местах где есть указанные знаки
+
+	while (pch != NULL)// пока есть лексмы
+	{
+		num_1 = strtof(line, &pEnd); //преобразование строки в вещественный тип(от line до нужного места &pEnd)
+		num_2 = strtof(pEnd+k, NULL); //преобразование строки в вещественный тип(от нужного места до конца)
+		pch = strtok(NULL, " ");
+	}
+	if (znak == '+')               //вычисления 
+		res = num_1 + num_2;
+	if (znak == '-')
+		res = num_1 - num_2;
+	if (znak == '*')
+		res = num_1 * num_2;
+	if (znak == '/')
+		res = num_1 / num_2;
+
+	if (znak == '+-')
+		res = num_1-num_2;
+	if (znak == 'n')
+		res = num_1 + num_2;
+	if (znak == '*-')
+		res = num_1*(-num_2);
+	if (znak == '/-')
+		res = num_1/(-num_2);
+
+	sprintf(line,"%2.1f", res);
+	printf("%s", line);
+	
+	/*
+	for (int i = 0; i < 10; i++)
+	{
+		if (line[i] == '+')
+		{
+			res = r + l;
+		}
+		if (line[i] == '-')
+		{
+			res = r - l;
+		}
+		if (line[i] == '*')
+		{
+			res = r*l;
+		}
+		if (line[i] == '/')
+		{
+			res = r / l;
+		}
+		if ((line[i] == '+') && (line[i++] == '-'))
+		{
+			res = r - l;
+		}
+		if ((line[i] == '-') && (line[i++] == '-'))
+		{
+			res = r + l;
+		}
+		if ((line[i] == '*') && (line[i++] == '-'))
+		{
+			res = r*(-l);
+		}
+		if ((line[i] == '/') && (line[i++] == '-'))
+		{
+		res=	r / (-l);
+		}
+	}
+	sprintf(line, "%2.1f", res);
+	printf("%s", line);
+	*/
+	return 0;
+}

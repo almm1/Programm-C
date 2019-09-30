@@ -17,15 +17,14 @@ int main(void)
 }
 void process_line(char buffer[])
 {
-	char c;
-	int flag, found, i, symb;
-	i = 0;
-	flag = NO;
-	found = NO;
-	symb = NO;
-	char *word_ptr = buffer;
-	char *in_ptr = buffer;
-	char *out_ptr = buffer;
+	char c; // текущий символ
+	int flag, found, symb;
+	flag = NO; // признак слова
+	found = NO; // искомый признак
+	symb = NO; // признак не слова
+	char *word_ptr = buffer; // указатель на начало слова
+	char *in_ptr = buffer; // указатель на текущий символ входной строки
+	char *out_ptr = buffer; // указатель на текущий символ выходной строки
 
 
 	do

@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <iostream>
 #define YES 1
 #define NO 0
 #define MAXLINE 1000
@@ -8,10 +8,14 @@ void process_line(char buffer[]);
 
 int main(void)
 {
+	setlocale(LC_ALL, "Russian");
 	char line[MAXLINE];
+	printf("Введите строку: ");
 	gets_s(line);
-	printf("\n");
+	printf("Исходная строка: %s", line);
 	process_line(line);
+	printf("\nзагрузка ... \n");
+	printf("Результат: ");
 	puts(line);
 	return 0;
 }
